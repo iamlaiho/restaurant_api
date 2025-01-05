@@ -7,6 +7,6 @@ module Types
     field :label, String, null: false
     field :description, String, null: false
     field :price, Float, null: false
-    field :modifier, ModifierType, null: true
+    field :modifier_groups, [ModifierGroupType], null: true
   end
 end

@@ -13,13 +13,16 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.1].define(version: 20_250_105_045_336) do
-  create_table 'item_modifiers', force: :cascade do |t|
-    t.integer 'items_id', null: false
-    t.integer 'modifier_groups_id', null: false
+  # These are extensions that must be enabled in order to support this database
+  enable_extension 'plpgsql'
+
+  create_table 'item_modifier_groups', force: :cascade do |t|
+    t.bigint 'item_id', null: false
+    t.bigint 'modifier_group_id', null: false
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
-    t.index ['items_id'], name: 'index_item_modifiers_on_items_id'
-    t.index ['modifier_groups_id'], name: 'index_item_modifiers_on_modifier_groups_id'
+    t.index ['item_id'], name: 'index_item_modifier_groups_on_item_id'
+    t.index ['modifier_group_id'], name: 'index_item_modifier_groups_on_modifier_group_id'
   end
 
   create_table 'items', force: :cascade do |t|
@@ -33,8 +36,8 @@ ActiveRecord::Schema[7.1].define(version: 20_250_105_045_336) do
   end
 
   create_table 'menu_sections', force: :cascade do |t|
-    t.integer 'menu_id', null: false
-    t.integer 'section_id', null: false
+    t.bigint 'menu_id', null: false
+    t.bigint 'section_id', null: false
     t.integer 'display_order', default: 0
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
@@ -63,8 +66,8 @@ ActiveRecord::Schema[7.1].define(version: 20_250_105_045_336) do
   end
 
   create_table 'modifiers', force: :cascade do |t|
-    t.integer 'item_id', null: false
-    t.integer 'modifier_group_id', null: false
+    t.bigint 'item_id', null: false
+    t.bigint 'modifier_group_id', null: false
     t.integer 'display_order', default: 0
     t.integer 'default_quantity', default: 0
     t.decimal 'price_override', precision: 10, scale: 2, null: false
@@ -75,8 +78,8 @@ ActiveRecord::Schema[7.1].define(version: 20_250_105_045_336) do
   end
 
   create_table 'section_items', force: :cascade do |t|
-    t.integer 'section_id', null: false
-    t.integer 'item_id', null: false
+    t.bigint 'section_id', null: false
+    t.bigint 'item_id', null: false
     t.integer 'display_order', default: 0
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
@@ -93,8 +96,8 @@ ActiveRecord::Schema[7.1].define(version: 20_250_105_045_336) do
     t.datetime 'updated_at', null: false
   end
 
-  add_foreign_key 'item_modifiers', 'items', column: 'items_id'
-  add_foreign_key 'item_modifiers', 'modifier_groups', column: 'modifier_groups_id'
+  add_foreign_key 'item_modifier_groups', 'items'
+  add_foreign_key 'item_modifier_groups', 'modifier_groups'
   add_foreign_key 'menu_sections', 'menus'
   add_foreign_key 'menu_sections', 'sections'
   add_foreign_key 'modifiers', 'items'

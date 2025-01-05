@@ -46,25 +46,16 @@ menu = Menu.create!(
     {
       display_order: 1,
       section_attributes: {
-        label: 'Drinks',
-        description: 'Are you thirsty?',
+        label: 'Add-on',
+        description: 'Feeling hungry?',
         section_items_attributes: [
           {
             display_order: 0,
             item_attributes: {
-              type: 'product',
-              label: 'Soda water',
-              description: 'Bland tasty!',
-              price: 5.00
-            }
-          },
-          {
-            display_order: 1,
-            item_attributes: {
-              type: 'product',
-              label: 'Vinegar',
-              description: 'Sour tasty!',
-              price: 10.00
+              type: 'component',
+              label: 'Cheese',
+              description: 'Add cheesey to your pizza',
+              price: 2.00
             }
           }
         ]
@@ -73,7 +64,8 @@ menu = Menu.create!(
   ]
 )
 
-item_modified = menu.sections.first.items.find { |item| item.label == 'Cheesy Pizza' }
+component = menu.sections.last.items.find { |item| item.label == 'Cheese' }
+product = menu.sections.first.items.find { |item| item.label == 'Cheesy Pizza' }
 
 ModifierGroup.create!(
   label: 'Add cheese slice(s)',
@@ -81,16 +73,19 @@ ModifierGroup.create!(
   selection_required_max: 2,
   modifiers_attributes: [
     {
-      item_id: item_modified.id,
+      item_id: component.id,
       display_order: 0,
       default_quantity: 2,
       price_override: 4.00
     },
     {
-      item_id: item_modified.id,
+      item_id: component.id,
       display_order: 1,
       default_quantity: 4,
       price_override: 8.00
     }
-  ]
+  ],
+  item_modifier_group_attributes: {
+    item_id: product.id
+  }
 )
