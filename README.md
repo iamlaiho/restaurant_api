@@ -30,6 +30,7 @@ Queries:
 
 Mutations:
  - createModifier
+ - createModifierGroup
 
 ## Question:
 What metrics would be good to track to understand the application performance?
