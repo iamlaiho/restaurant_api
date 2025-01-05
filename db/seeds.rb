@@ -9,3 +9,88 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+menu = Menu.create!(
+  label: '2025 Special',
+  state: 'active',
+  start_date: Date.new(2024, 12, 0o1),
+  end_date: Date.new(2025, 12, 31),
+  menu_sections_attributes: [
+    {
+      display_order: 0,
+      section_attributes: {
+        label: 'Pizzas',
+        description: 'Baked with firewood!',
+        section_items_attributes: [
+          {
+            display_order: 0,
+            item_attributes: {
+              type: 'product',
+              label: 'Cheesy Pizza',
+              description: 'Yummy cheesy!',
+              price: 15.00
+            }
+          },
+          {
+            display_order: 1,
+            item_attributes: {
+              type: 'product',
+              label: 'Spicy Pizza',
+              description: 'Yummy spicy',
+              price: 20.00
+            }
+          }
+        ]
+      }
+    },
+    {
+      display_order: 1,
+      section_attributes: {
+        label: 'Drinks',
+        description: 'Are you thirsty?',
+        section_items_attributes: [
+          {
+            display_order: 0,
+            item_attributes: {
+              type: 'product',
+              label: 'Soda water',
+              description: 'Bland tasty!',
+              price: 5.00
+            }
+          },
+          {
+            display_order: 1,
+            item_attributes: {
+              type: 'product',
+              label: 'Vinegar',
+              description: 'Sour tasty!',
+              price: 10.00
+            }
+          }
+        ]
+      }
+    }
+  ]
+)
+
+item_modified = menu.sections.first.items.find { |item| item.label == 'Cheesy Pizza' }
+
+ModifierGroup.create!(
+  label: 'Add cheese slice(s)',
+  selection_required_min: 0,
+  selection_required_max: 2,
+  modifiers_attributes: [
+    {
+      item_id: item_modified.id,
+      display_order: 0,
+      default_quantity: 2,
+      price_override: 4.00
+    },
+    {
+      item_id: item_modified.id,
+      display_order: 1,
+      default_quantity: 4,
+      price_override: 8.00
+    }
+  ]
+)
