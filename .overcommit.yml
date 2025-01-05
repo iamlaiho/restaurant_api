@@ -18,6 +18,10 @@
 CommitMsg:
   CapitalizedSubject: 
     enabled: false
+  TextWidth:
+    enabled: true
+    max_subject_width: 72
+    on_warn: fail
 
 PreCommit:
  RuboCop:
