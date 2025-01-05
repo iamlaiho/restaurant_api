@@ -4,6 +4,8 @@ class SectionItem < ApplicationRecord
   belongs_to :section
   belongs_to :item
 
+  accepts_nested_attributes_for :item
+
   validates :display_order,
             uniqueness: true,
             numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than: 100 }

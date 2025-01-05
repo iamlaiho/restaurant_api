@@ -6,6 +6,8 @@ class ModifierGroup < ApplicationRecord
   has_one :item_modifier_group
   has_one :item, through: :item_modifier_group
 
+  accepts_nested_attributes_for :item_modifier_group, :modifiers
+
   validates :label, length: { in: 1..999 }
   validates :selection_required_min, numericality: { greater_than_or_equal_to: 0, less_than: 100 }
   validates :selection_required_max, numericality: { greater_than_or_equal_to: 0, less_than: 100 }

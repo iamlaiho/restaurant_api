@@ -4,6 +4,8 @@ class Modifier < ApplicationRecord
   belongs_to :item
   belongs_to :modifier_group
 
+  accepts_nested_attributes_for :item
+
   validates :display_order,
             uniqueness: true,
             numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than: 100 }

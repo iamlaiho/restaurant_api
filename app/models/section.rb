@@ -6,6 +6,8 @@ class Section < ApplicationRecord
   has_many :section_items
   has_many :items, through: :section_items
 
+  accepts_nested_attributes_for :section_items
+
   validates :label, length: { in: 1..999 }
   validates :description, length: { in: 1..999 }
 

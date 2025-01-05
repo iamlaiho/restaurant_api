@@ -4,6 +4,8 @@ class Menu < ApplicationRecord
   has_many :menu_sections
   has_many :sections, through: :menu_sections
 
+  accepts_nested_attributes_for :menu_sections
+
   validates_presence_of :start_date, :end_date
   validates :label, length: { in: 1..999 }
   validates :state, length: { in: 1..999 }
