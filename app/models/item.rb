@@ -19,4 +19,8 @@ class Item < ApplicationRecord
 
   before_create { self.identifier = SecureRandom.uuid }
   before_update { identifier.reload }
+
+  def price
+    super.present? ? super.to_f : nil
+  end
 end
