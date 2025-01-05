@@ -40,6 +40,12 @@ gem 'bootsnap', require: false
 # Use graphql
 gem 'graphql', '~> 2.4'
 
+# Use Graphql query editor
+gem 'graphiql-rails', '~> 1.10'
+
+# Use to complie Javascript and CSS
+gem 'sprockets-rails', '~> 3.5'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri windows]
