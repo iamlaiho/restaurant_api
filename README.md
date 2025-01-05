@@ -29,7 +29,7 @@ Queries:
  - menus
 
 Mutations:
- - updateModifier 
+ - createModifier
 
 ## Question:
 What metrics would be good to track to understand the application performance?

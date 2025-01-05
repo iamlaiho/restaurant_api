@@ -2,6 +2,6 @@
 
 module Types
   class MutationType < Types::BaseObject
-    field :update_modifier, mutation: Mutations::Modifiers::UpdateModifier
+    field :create_modifier, mutation: Mutations::Modifiers::CreateModifier
   end
 end
