@@ -1,0 +1,10 @@
+Documentation:
+  Enabled: false
+AllCops:
+  Exclude:
+    - 'bin/*'
+Metrics/BlockLength:
+  Exclude:
+    - 'db/schema.rb'
+Metrics/MethodLength:
+  Max: 12
