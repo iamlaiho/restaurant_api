@@ -6,6 +6,9 @@ class Section < ApplicationRecord
   has_many :section_items
   has_many :items, through: :section_items
 
+  validates :label, length: { in: 1..999 }
+  validates :description, length: { in: 1..999 }
+
   before_create { self.identifier = SecureRandom.uuid }
   before_update { identifier.reload }
 end
